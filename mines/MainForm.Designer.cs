@@ -34,12 +34,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 459);
+            this.ClientSize = new System.Drawing.Size(319, 321);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Mines";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }

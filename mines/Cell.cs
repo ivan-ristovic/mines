@@ -5,7 +5,7 @@ namespace mines
 {
     class Cell
     {
-        public static int CELL_SIZE = 20;
+        public static int CELL_SIZE = 30;
 
         private int X;
         private int Y;
