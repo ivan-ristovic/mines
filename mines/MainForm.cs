@@ -22,17 +22,23 @@ namespace mines
         }
 
         private void MainForm_Load(object sender, EventArgs e)
-        {
+        {   
+            // Creating Cell grid:
+            // horizontal and vertical are initial positions for the grid's upper left cell
             int horizontal = 10, vertical = 10;
             for (int i = 0; i < FIELD_SIZE; i++) {
                 for (int j = 0; j < FIELD_SIZE; j++) {
+                    // Creating cell
                     Field[i, j] = new Cell(this, horizontal, vertical, i, j, false);
+                    // Moving to next cell in a row
                     horizontal += Cell.CELL_SIZE;
                 }
+                // Moving to next row
                 horizontal = 10;
                 vertical += Cell.CELL_SIZE;
             }
 
+            // Initializing field
             PlaceBombs();
             UpdateFieldLabels();
         }
@@ -55,8 +61,9 @@ namespace mines
                     if (Field[i, j].HasBomb())
                         continue;
 
-                    // TODO
-                    Field[i, j].SetBackLabel(1);
+                    // Counting how many bombs there are around our current cell
+                    int count = 0;
+                    Field[i, j].SetBackLabel(count);
                 }
             }
         }

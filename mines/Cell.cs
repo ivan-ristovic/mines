@@ -8,12 +8,18 @@ namespace mines
     {
         public static int CELL_SIZE = 30;
 
+        // Cell position in MainForm (in pixels)
         private int X;
         private int Y;
+        
+        // Cell is made of one button (front) and a label (back)
         private Button Front;
         private Label Back;
+
+        // Indicator if bomb is underneath the cell
         private bool BombInd;
 
+        
         public Cell(MainForm parent, int x, int y, int posx, int posy, bool bombInd)
         {
             X = x;
@@ -37,8 +43,11 @@ namespace mines
             parent.Controls.Add(Back);
         }
 
+
+        // Opening cell - hiding front button
         public void Open()
         {
+            // I decided to leave it hidden because maybe in future I might implement an undo option
             Front.Visible = false;
         }
 
@@ -60,6 +69,8 @@ namespace mines
         public void SetBackLabel(int bombNum)
         {
             Back.Text = bombNum.ToString();
+
+            // Deciding which color to use, depending on the number of bombs around the cell
             switch (bombNum) {
                 case 1:
                     Back.ForeColor = Color.Blue;
