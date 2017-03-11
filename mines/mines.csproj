@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cell.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
