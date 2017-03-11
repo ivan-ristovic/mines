@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace mines
@@ -15,14 +8,18 @@ namespace mines
         private static int FIELD_SIZE = 10;
         private static int BOMB_NUM = 15;
         private Cell[,] Field = new Cell[FIELD_SIZE, FIELD_SIZE];
+        private bool GameOver = false;
+
 
         public MainForm()
         {
             InitializeComponent();
+            CreateCellGrid();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {   
+
+        private void CreateCellGrid()
+        {
             // Creating Cell grid:
             // horizontal and vertical are initial positions for the grid's upper left cell
             int horizontal = 10, vertical = 10;
@@ -88,12 +85,18 @@ namespace mines
 
         public void CellClick(object sender, EventArgs e)
         {
+            if (GameOver)
+                return;
+
             Location l = (Location)(((Button)sender).Tag);
             int i = l.GetX();
             int j = l.GetY();
-            if (Field[i, j].HasBomb())
-                MessageBox.Show("gg");
             Field[i, j].Open();
+            if (Field[i, j].HasBomb()) {
+                MessageBox.Show("gg");
+                GameOver = true;
+                return;
+            }
             if (Field[i, j].GetBackLabelText() == "") {
                 // TODO open recursively all cells around current cell
             }
