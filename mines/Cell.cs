@@ -47,6 +47,11 @@ namespace mines
         }
 
 
+        public Button GetButton()
+        {
+            return Front;
+        }
+
         // Opening cell - hiding front button
         public void Open()
         {

@@ -91,14 +91,32 @@ namespace mines
             Location l = (Location)(((Button)sender).Tag);
             int i = l.GetX();
             int j = l.GetY();
+
             Field[i, j].Open();
             if (Field[i, j].HasBomb()) {
                 MessageBox.Show("gg");
                 GameOver = true;
                 return;
             }
+
+            // If the field is blank, then recursively open all neighbour fields
             if (Field[i, j].GetBackLabelText() == "") {
-                // TODO open recursively all cells around current cell
+                if (i > 0 && j > 0 && !Field[i - 1, j - 1].IsOpen())
+                    CellClick(Field[i - 1, j - 1].GetButton(), e);
+                if (i > 0 && !Field[i - 1, j].IsOpen())
+                    CellClick(Field[i - 1, j].GetButton(), e);
+                if (i > 0 && j < FIELD_SIZE - 1 && !Field[i - 1, j + 1].IsOpen())
+                    CellClick(Field[i - 1, j + 1].GetButton(), e);
+                if (j > 0 && !Field[i, j - 1].IsOpen())
+                    CellClick(Field[i, j - 1].GetButton(), e);
+                if (j < FIELD_SIZE - 1 && !Field[i, j + 1].IsOpen())
+                    CellClick(Field[i, j + 1].GetButton(), e);
+                if (i < FIELD_SIZE - 1 && j > 0 && !Field[i + 1, j - 1].IsOpen())
+                    CellClick(Field[i + 1, j - 1].GetButton(), e);
+                if (i < FIELD_SIZE - 1 && !Field[i + 1, j].IsOpen())
+                    CellClick(Field[i + 1, j].GetButton(), e);
+                if (i < FIELD_SIZE - 1 && j < FIELD_SIZE - 1 && !Field[i + 1, j + 1].IsOpen())
+                    CellClick(Field[i + 1, j + 1].GetButton(), e);
             }
         }
     }
