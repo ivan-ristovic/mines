@@ -5,8 +5,11 @@ namespace mines
 {
     public partial class MainForm : Form
     {
+        // Game properties
         private static int FIELD_SIZE = 10;
         private static int BOMB_NUM = 15;
+
+        // Cell grid and game running indicator
         private Cell[,] Field = new Cell[FIELD_SIZE, FIELD_SIZE];
         private bool GameOver = false;
 
@@ -42,6 +45,7 @@ namespace mines
 
         private void PlaceBombs()
         {
+            // Randomly place bombs on the board
             Random r = new Random();
             for (int i = 0; i < BOMB_NUM; i++) {
                 int x = r.Next(FIELD_SIZE);
@@ -55,6 +59,8 @@ namespace mines
         {
             for (int i = 0; i < FIELD_SIZE; i++) {
                 for (int j = 0; j < FIELD_SIZE; j++) {
+                    
+                    // Skipping mine cells
                     if (Field[i, j].HasBomb())
                         continue;
 
@@ -83,40 +89,52 @@ namespace mines
             }
         }
 
-        public void CellClick(object sender, EventArgs e)
+        public void CellClick(object sender, MouseEventArgs me)
         {
-            if (GameOver)
-                return;
-
+            // Extracting location of the clicked cell
             Location l = (Location)(((Button)sender).Tag);
             int i = l.GetX();
             int j = l.GetY();
 
-            Field[i, j].Open();
+            // Determinating left/right click
+            if (me.Button == MouseButtons.Left && !Field[i, j].HasMark()) {
+                OpenCell(i, j);
+            } else
+                Field[i, j].Mark();
+        }
+
+        private void OpenCell(int i, int j)
+        {
+            if (GameOver)
+                return;
+
+            if (!Field[i, j].HasMark())
+                Field[i, j].Open();
+
             if (Field[i, j].HasBomb()) {
                 MessageBox.Show("gg");
                 GameOver = true;
                 return;
             }
 
-            // If the field is blank, then recursively open all neighbour fields
+            // If the field is blank, then recursively open all neighbour cells which aren't marked
             if (Field[i, j].GetBackLabelText() == "") {
                 if (i > 0 && j > 0 && !Field[i - 1, j - 1].IsOpen())
-                    CellClick(Field[i - 1, j - 1].GetButton(), e);
+                    OpenCell(i - 1, j - 1);
                 if (i > 0 && !Field[i - 1, j].IsOpen())
-                    CellClick(Field[i - 1, j].GetButton(), e);
+                    OpenCell(i - 1, j);
                 if (i > 0 && j < FIELD_SIZE - 1 && !Field[i - 1, j + 1].IsOpen())
-                    CellClick(Field[i - 1, j + 1].GetButton(), e);
+                    OpenCell(i - 1, j + 1);
                 if (j > 0 && !Field[i, j - 1].IsOpen())
-                    CellClick(Field[i, j - 1].GetButton(), e);
+                    OpenCell(i, j - 1);
                 if (j < FIELD_SIZE - 1 && !Field[i, j + 1].IsOpen())
-                    CellClick(Field[i, j + 1].GetButton(), e);
+                    OpenCell(i, j + 1);
                 if (i < FIELD_SIZE - 1 && j > 0 && !Field[i + 1, j - 1].IsOpen())
-                    CellClick(Field[i + 1, j - 1].GetButton(), e);
+                    OpenCell(i + 1, j - 1);
                 if (i < FIELD_SIZE - 1 && !Field[i + 1, j].IsOpen())
-                    CellClick(Field[i + 1, j].GetButton(), e);
+                    OpenCell(i + 1, j);
                 if (i < FIELD_SIZE - 1 && j < FIELD_SIZE - 1 && !Field[i + 1, j + 1].IsOpen())
-                    CellClick(Field[i + 1, j + 1].GetButton(), e);
+                    OpenCell(i + 1, j + 1);
             }
         }
     }

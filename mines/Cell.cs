@@ -18,8 +18,9 @@ namespace mines
         // Indicator if bomb is underneath the cell
         private bool BombInd;
 
-        // Indicator if cell is opened
+        // Indicators
         private bool IsOpened;
+        private bool IsMarked;
 
         
         public Cell(MainForm parent, int x, int y, int posx, int posy, bool bombInd)
@@ -36,7 +37,7 @@ namespace mines
                 TabStop = false,
                 Tag = new Location(posx, posy)
             };
-            Front.Click += parent.CellClick;
+            Front.MouseDown += parent.CellClick;
             Back = new Label() {
                 TextAlign = ContentAlignment.MiddleCenter,
                 Size = new Size(CELL_SIZE, CELL_SIZE),
@@ -60,9 +61,23 @@ namespace mines
             IsOpened = true;
         }
 
+        public void Mark()
+        {
+            if (IsMarked)
+                Front.Text = "";
+            else
+                Front.Text = "$";
+            IsMarked = !IsMarked;
+        }
+
         public bool IsOpen()
         {
             return IsOpened;
+        }
+
+        public bool HasMark()
+        {
+            return IsMarked;
         }
 
         public bool HasBomb()
