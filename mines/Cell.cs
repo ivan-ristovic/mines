@@ -19,12 +19,16 @@ namespace mines
         // Indicator if bomb is underneath the cell
         private bool BombInd;
 
+        // Indicator if cell is opened
+        private bool IsOpened;
+
         
         public Cell(MainForm parent, int x, int y, int posx, int posy, bool bombInd)
         {
             X = x;
             Y = y;
             BombInd = bombInd;
+            IsOpened = false;
             Front = new Button() {
                 Text = "",
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -49,6 +53,12 @@ namespace mines
         {
             // I decided to leave it hidden because maybe in future I might implement an undo option
             Front.Visible = false;
+            IsOpened = true;
+        }
+
+        public bool IsOpen()
+        {
+            return IsOpened;
         }
 
         public bool HasBomb()
@@ -59,6 +69,11 @@ namespace mines
         public void SetBomb()
         {
             BombInd = true;
+        }
+
+        public string GetBackLabelText()
+        {
+            return Back.Text;
         }
 
         public void SetBackLabelText(string text)

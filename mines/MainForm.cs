@@ -63,18 +63,40 @@ namespace mines
 
                     // Counting how many bombs there are around our current cell
                     int count = 0;
-                    Field[i, j].SetBackLabel(count);
+                    if (i > 0 && j > 0 && Field[i - 1, j - 1].HasBomb())
+                        count++;
+                    if (i > 0 && Field[i - 1, j].HasBomb())
+                        count++;
+                    if (i > 0 && j < FIELD_SIZE - 1 && Field[i - 1, j + 1].HasBomb())
+                        count++;
+                    if (j > 0 && Field[i, j - 1].HasBomb())
+                        count++;
+                    if (j < FIELD_SIZE - 1 && Field[i, j + 1].HasBomb())
+                        count++;
+                    if (i < FIELD_SIZE - 1 && j > 0 && Field[i + 1, j - 1].HasBomb())
+                        count++;
+                    if (i < FIELD_SIZE - 1 && Field[i + 1, j].HasBomb())
+                        count++;
+                    if (i < FIELD_SIZE - 1 && j < FIELD_SIZE - 1 && Field[i + 1, j + 1].HasBomb())
+                        count++;
+
+                    if (count != 0)
+                        Field[i, j].SetBackLabel(count);
                 }
             }
         }
 
         public void CellClick(object sender, EventArgs e)
         {
-            Button b = sender as Button;
-            Location l = (Location)(b.Tag);
-            if (Field[l.GetX(), l.GetY()].HasBomb())
+            Location l = (Location)(((Button)sender).Tag);
+            int i = l.GetX();
+            int j = l.GetY();
+            if (Field[i, j].HasBomb())
                 MessageBox.Show("gg");
-            Field[l.GetX(), l.GetY()].Open();
+            Field[i, j].Open();
+            if (Field[i, j].GetBackLabelText() == "") {
+                // TODO open recursively all cells around current cell
+            }
         }
     }
 }
