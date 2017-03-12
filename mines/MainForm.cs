@@ -17,15 +17,15 @@ namespace mines
         public MainForm()
         {
             InitializeComponent();
-            CreateCellGrid();
+            CreateCellGridAt(10, 60);
         }
 
 
-        private void CreateCellGrid()
+        private void CreateCellGridAt(int x, int y)
         {
             // Creating Cell grid:
             // horizontal and vertical are initial positions for the grid's upper left cell
-            int horizontal = 10, vertical = 10;
+            int horizontal = x, vertical = y;
             for (int i = 0; i < FIELD_SIZE; i++) {
                 for (int j = 0; j < FIELD_SIZE; j++) {
                     // Creating cell
@@ -34,7 +34,7 @@ namespace mines
                     horizontal += Cell.CELL_SIZE;
                 }
                 // Moving to next row
-                horizontal = 10;
+                horizontal = x;
                 vertical += Cell.CELL_SIZE;
             }
 
@@ -59,7 +59,7 @@ namespace mines
         {
             for (int i = 0; i < FIELD_SIZE; i++) {
                 for (int j = 0; j < FIELD_SIZE; j++) {
-                    
+
                     // Skipping mine cells
                     if (Field[i, j].HasBomb())
                         continue;
@@ -136,6 +136,21 @@ namespace mines
                 if (i < FIELD_SIZE - 1 && j < FIELD_SIZE - 1 && !Field[i + 1, j + 1].IsOpen())
                     OpenCell(i + 1, j + 1);
             }
+        }
+
+        private void msMainMenuGameNew_Click(object sender, EventArgs e)
+        {
+            // Clearing field
+            for (int i = 0; i < FIELD_SIZE; i++) {
+                for (int j = 0; j < FIELD_SIZE; j++) {
+                    Field[i, j].Clear();
+                }
+            }
+
+            // Placing new bombs and updating numbers
+            GameOver = false;
+            PlaceBombs();
+            UpdateFieldLabels();
         }
     }
 }

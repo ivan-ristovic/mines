@@ -134,5 +134,14 @@ namespace mines
                     break;
             } // end switch
         }
+
+        public void Clear()
+        {
+            IsOpened = false;
+            BombInd = false;
+            Front.Visible = true;
+            Front.Text = "";
+            Back.Text = "";
+        }
     }
 }
