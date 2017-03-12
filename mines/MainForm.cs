@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace mines
@@ -17,7 +18,10 @@ namespace mines
         public MainForm()
         {
             InitializeComponent();
-            CreateCellGridAt(10, 60);
+            CreateCellGridAt(5, 75);
+            Width = 25 + FIELD_SIZE * Cell.CELL_SIZE;
+            Height = 120 + FIELD_SIZE * Cell.CELL_SIZE;
+            btnResetGame.Location = new Point((Width - btnResetGame.Width) / 2, 30);
         }
 
 

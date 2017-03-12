@@ -143,5 +143,10 @@ namespace mines
             Front.Text = "";
             Back.Text = "";
         }
+
+        public int getX()
+        {
+            return X;
+        }
     }
 }

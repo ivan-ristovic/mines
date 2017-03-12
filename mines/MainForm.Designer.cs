@@ -33,6 +33,7 @@
             this.msMainMenuGameNew = new System.Windows.Forms.ToolStripMenuItem();
             this.msMainMenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.msMainMenuAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnResetGame = new System.Windows.Forms.Button();
             this.msMainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,11 +76,21 @@
             this.msMainMenuAbout.Size = new System.Drawing.Size(52, 20);
             this.msMainMenuAbout.Text = "About";
             // 
+            // btnResetGame
+            // 
+            this.btnResetGame.Location = new System.Drawing.Point(12, 27);
+            this.btnResetGame.Name = "btnResetGame";
+            this.btnResetGame.Size = new System.Drawing.Size(40, 40);
+            this.btnResetGame.TabIndex = 1;
+            this.btnResetGame.UseVisualStyleBackColor = true;
+            this.btnResetGame.Click += new System.EventHandler(this.msMainMenuGameNew_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 371);
+            this.ClientSize = new System.Drawing.Size(319, 381);
+            this.Controls.Add(this.btnResetGame);
             this.Controls.Add(this.msMainMenu);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -101,6 +112,7 @@
         private System.Windows.Forms.ToolStripMenuItem msMainMenuHelp;
         private System.Windows.Forms.ToolStripMenuItem msMainMenuAbout;
         private System.Windows.Forms.ToolStripMenuItem msMainMenuGameNew;
+        private System.Windows.Forms.Button btnResetGame;
     }
 }
 
