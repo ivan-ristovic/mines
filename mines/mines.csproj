@@ -96,5 +96,8 @@
   <ItemGroup>
     <None Include="assets\imgWin.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\imgFlag.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

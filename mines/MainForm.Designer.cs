@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnResetGame = new System.Windows.Forms.Button();
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.msMenuGame = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,9 +95,11 @@
             this.Controls.Add(this.msMenu);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Mines";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.msMenu.ResumeLayout(false);
             this.msMenu.PerformLayout();
             this.ResumeLayout(false);

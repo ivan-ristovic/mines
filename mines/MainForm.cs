@@ -24,13 +24,21 @@ namespace mines
         public MainForm()
         {
             InitializeComponent();
+        }
+
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
             CreateCellGridAt(5, 75);
+
+            // Resizing form to fit the field
             Width = 25 + FIELD_SIZE * Cell.CELL_SIZE;
             Height = 120 + FIELD_SIZE * Cell.CELL_SIZE;
+
+            // Calculating middle reset button location and placing it's image
             btnResetGame.Location = new Point((Width - btnResetGame.Width) / 2, 30);
             btnResetGame.Image = IMG_NEUTRAL;
         }
-
 
         private void CreateCellGridAt(int x, int y)
         {
@@ -127,7 +135,7 @@ namespace mines
 
             if (Field[i, j].HasBomb()) {
                 btnResetGame.Image = IMG_LOSE;
-                MessageBox.Show("gg");
+                LockField();
                 GameOver = true;
                 return;
             }
@@ -162,11 +170,30 @@ namespace mines
                 }
             }
 
-            // Placing new bombs and updating numbers
+            // Resetting game
             GameOver = false;
             PlaceBombs();
             UpdateFieldLabels();
+            UnlockField();
             btnResetGame.Image = IMG_NEUTRAL;
+        }
+
+        private void LockField()
+        {
+            for (int i = 0; i < FIELD_SIZE; i++) {
+                for (int j = 0; j < FIELD_SIZE; j++) {
+                    Field[i, j].Lock();
+                }
+            }
+        }
+
+        private void UnlockField()
+        {
+            for (int i = 0; i < FIELD_SIZE; i++) {
+                for (int j = 0; j < FIELD_SIZE; j++) {
+                    Field[i, j].Unlock();
+                }
+            }
         }
     }
 }

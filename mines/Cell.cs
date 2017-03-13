@@ -6,7 +6,8 @@ namespace mines
     class Cell
     {
         public static int CELL_SIZE = 30;
-        private static Image MINE_IMG = Properties.Resources.imgMine;
+        private static Image IMG_MINE = Properties.Resources.imgMine;
+        private static Image IMG_FLAG = Properties.Resources.imgFlag;
 
         // Cell position in MainForm (in pixels)
         private int X;
@@ -60,9 +61,9 @@ namespace mines
         public void Mark()
         {
             if (IsMarked)
-                Front.Text = "";
+                Front.Image = null;
             else
-                Front.Text = "$";
+                Front.Image = IMG_FLAG;
             IsMarked = !IsMarked;
         }
 
@@ -84,7 +85,7 @@ namespace mines
         public void SetBomb()
         {
             BombInd = true;
-            Back.Image = MINE_IMG;
+            Back.Image = IMG_MINE;
         }
 
         public string GetBackLabelText()
@@ -139,7 +140,18 @@ namespace mines
             Front.Visible = true;
             Front.Text = "";
             Back.Text = "";
+            Front.Image = null;
             Back.Image = null;
+        }
+
+        public void Lock()
+        {
+            Front.Enabled = false;
+        }
+
+        public void Unlock()
+        {
+            Front.Enabled = true;
         }
     }
 }
