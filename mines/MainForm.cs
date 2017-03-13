@@ -6,6 +6,12 @@ namespace mines
 {
     public partial class MainForm : Form
     {
+        // Images that we are using
+        private static Image IMG_NEUTRAL = Properties.Resources.imgNeutral;
+        private static Image IMG_OPEN = Properties.Resources.imgOpen;
+        private static Image IMG_WIN = Properties.Resources.imgWin;
+        private static Image IMG_LOSE = Properties.Resources.imgLose;
+
         // Game properties
         private static int FIELD_SIZE = 10;
         private static int BOMB_NUM = 15;
@@ -22,6 +28,7 @@ namespace mines
             Width = 25 + FIELD_SIZE * Cell.CELL_SIZE;
             Height = 120 + FIELD_SIZE * Cell.CELL_SIZE;
             btnResetGame.Location = new Point((Width - btnResetGame.Width) / 2, 30);
+            btnResetGame.Image = IMG_NEUTRAL;
         }
 
 
@@ -102,7 +109,10 @@ namespace mines
 
             // Determinating left/right click
             if (me.Button == MouseButtons.Left && !Field[i, j].HasMark()) {
+                btnResetGame.Image = IMG_OPEN;
                 OpenCell(i, j);
+                if (!GameOver)
+                    btnResetGame.Image = IMG_NEUTRAL;
             } else
                 Field[i, j].Mark();
         }
@@ -116,6 +126,7 @@ namespace mines
                 Field[i, j].Open();
 
             if (Field[i, j].HasBomb()) {
+                btnResetGame.Image = IMG_LOSE;
                 MessageBox.Show("gg");
                 GameOver = true;
                 return;
@@ -155,6 +166,7 @@ namespace mines
             GameOver = false;
             PlaceBombs();
             UpdateFieldLabels();
+            btnResetGame.Image = IMG_NEUTRAL;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace mines
     class Cell
     {
         public static int CELL_SIZE = 30;
+        private static Image MINE_IMG = Properties.Resources.imgMine;
 
         // Cell position in MainForm (in pixels)
         private int X;
@@ -48,11 +49,6 @@ namespace mines
         }
 
 
-        public Button GetButton()
-        {
-            return Front;
-        }
-
         // Opening cell - hiding front button
         public void Open()
         {
@@ -88,6 +84,7 @@ namespace mines
         public void SetBomb()
         {
             BombInd = true;
+            Back.Image = MINE_IMG;
         }
 
         public string GetBackLabelText()
@@ -142,11 +139,7 @@ namespace mines
             Front.Visible = true;
             Front.Text = "";
             Back.Text = "";
-        }
-
-        public int getX()
-        {
-            return X;
+            Back.Image = null;
         }
     }
 }
