@@ -42,6 +42,7 @@ namespace mines
             Front.MouseDown += parent.CellClick;
             Back = new Label() {
                 TextAlign = ContentAlignment.MiddleCenter,
+                Font = new Font("Helvetica", 10),
                 Size = new Size(CELL_SIZE, CELL_SIZE),
                 Location = new Point(X, Y)
             };
