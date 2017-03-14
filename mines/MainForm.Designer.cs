@@ -35,12 +35,13 @@
             this.msMenuGameNew = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenuAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.msMainGameOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnResetGame
             // 
-            this.btnResetGame.Location = new System.Drawing.Point(12, 27);
+            this.btnResetGame.Location = new System.Drawing.Point(145, 27);
             this.btnResetGame.Name = "btnResetGame";
             this.btnResetGame.Size = new System.Drawing.Size(40, 40);
             this.btnResetGame.TabIndex = 1;
@@ -62,7 +63,8 @@
             // msMenuGame
             // 
             this.msMenuGame.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.msMenuGameNew});
+            this.msMenuGameNew,
+            this.msMainGameOptions});
             this.msMenuGame.Name = "msMenuGame";
             this.msMenuGame.Size = new System.Drawing.Size(50, 20);
             this.msMenuGame.Text = "Game";
@@ -79,12 +81,21 @@
             this.msMenuHelp.Name = "msMenuHelp";
             this.msMenuHelp.Size = new System.Drawing.Size(44, 20);
             this.msMenuHelp.Text = "Help";
+            this.msMenuHelp.Click += new System.EventHandler(this.msMenuHelp_Click);
             // 
             // msMenuAbout
             // 
             this.msMenuAbout.Name = "msMenuAbout";
             this.msMenuAbout.Size = new System.Drawing.Size(52, 20);
             this.msMenuAbout.Text = "About";
+            this.msMenuAbout.Click += new System.EventHandler(this.msMenuAbout_Click);
+            // 
+            // msMainGameOptions
+            // 
+            this.msMainGameOptions.Name = "msMainGameOptions";
+            this.msMainGameOptions.Size = new System.Drawing.Size(152, 22);
+            this.msMainGameOptions.Text = "Options";
+            this.msMainGameOptions.Click += new System.EventHandler(this.msMainGameOptions_Click);
             // 
             // MainForm
             // 
@@ -114,6 +125,7 @@
         private System.Windows.Forms.ToolStripMenuItem msMenuGameNew;
         private System.Windows.Forms.ToolStripMenuItem msMenuHelp;
         private System.Windows.Forms.ToolStripMenuItem msMenuAbout;
+        private System.Windows.Forms.ToolStripMenuItem msMainGameOptions;
     }
 }
 

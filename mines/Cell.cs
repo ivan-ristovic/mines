@@ -154,5 +154,11 @@ namespace mines
         {
             Front.Enabled = true;
         }
+
+        public void Delete()
+        {
+            Front.Dispose();
+            Back.Dispose();
+        }
     }
 }

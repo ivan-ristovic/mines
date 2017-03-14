@@ -13,31 +13,44 @@ namespace mines
         private static Image IMG_LOSE = Properties.Resources.imgLose;
 
         // Game properties
-        private static int FIELD_SIZE = 10;
-        private static int BOMB_NUM = 15;
+        private static int FIELD_SIZE_X = 10;
+        private static int FIELD_SIZE_Y = 10;
+        private static int MINE_NUM = 15;
 
         // Cell grid and game running indicator
-        private Cell[,] Field = new Cell[FIELD_SIZE, FIELD_SIZE];
+        private Cell[,] Field;
         private bool GameOver = false;
+
+        // Options form
+        private frmOptions Options;
 
 
         public MainForm()
         {
             InitializeComponent();
+            Options = new frmOptions(this);
         }
 
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // Creating field
+            Field = new Cell[FIELD_SIZE_Y, FIELD_SIZE_X];
             CreateCellGridAt(5, 75);
 
             // Resizing form to fit the field
-            Width = 25 + FIELD_SIZE * Cell.CELL_SIZE;
-            Height = 120 + FIELD_SIZE * Cell.CELL_SIZE;
+            ResizeForm();
+
+            btnResetGame.Image = IMG_NEUTRAL;
+        }
+
+        private void ResizeForm()
+        {
+            Width = 25 + FIELD_SIZE_X * Cell.CELL_SIZE;
+            Height = 120 + FIELD_SIZE_Y * Cell.CELL_SIZE;
 
             // Calculating middle reset button location and placing it's image
             btnResetGame.Location = new Point((Width - btnResetGame.Width) / 2, 30);
-            btnResetGame.Image = IMG_NEUTRAL;
         }
 
         private void CreateCellGridAt(int x, int y)
@@ -45,8 +58,8 @@ namespace mines
             // Creating Cell grid:
             // horizontal and vertical are initial positions for the grid's upper left cell
             int horizontal = x, vertical = y;
-            for (int i = 0; i < FIELD_SIZE; i++) {
-                for (int j = 0; j < FIELD_SIZE; j++) {
+            for (int i = 0; i < FIELD_SIZE_Y; i++) {
+                for (int j = 0; j < FIELD_SIZE_X; j++) {
                     // Creating cell
                     Field[i, j] = new Cell(this, horizontal, vertical, i, j, false);
                     // Moving to next cell in a row
@@ -66,18 +79,36 @@ namespace mines
         {
             // Randomly place bombs on the board
             Random r = new Random();
-            for (int i = 0; i < BOMB_NUM; i++) {
-                int x = r.Next(FIELD_SIZE);
-                int y = r.Next(FIELD_SIZE);
+            for (int i = 0; i < MINE_NUM; i++) {
+                int x = r.Next(FIELD_SIZE_Y);
+                int y = r.Next(FIELD_SIZE_X);
                 Field[x, y].SetBomb();
                 Field[x, y].SetBackLabelText("*");
             }
         }
 
+        private void LockField()
+        {
+            for (int i = 0; i < FIELD_SIZE_Y; i++) {
+                for (int j = 0; j < FIELD_SIZE_X; j++) {
+                    Field[i, j].Lock();
+                }
+            }
+        }
+
+        private void UnlockField()
+        {
+            for (int i = 0; i < FIELD_SIZE_Y; i++) {
+                for (int j = 0; j < FIELD_SIZE_X; j++) {
+                    Field[i, j].Unlock();
+                }
+            }
+        }
+
         private void UpdateFieldLabels()
         {
-            for (int i = 0; i < FIELD_SIZE; i++) {
-                for (int j = 0; j < FIELD_SIZE; j++) {
+            for (int i = 0; i < FIELD_SIZE_Y; i++) {
+                for (int j = 0; j < FIELD_SIZE_X; j++) {
 
                     // Skipping mine cells
                     if (Field[i, j].HasBomb())
@@ -89,17 +120,17 @@ namespace mines
                         count++;
                     if (i > 0 && Field[i - 1, j].HasBomb())
                         count++;
-                    if (i > 0 && j < FIELD_SIZE - 1 && Field[i - 1, j + 1].HasBomb())
+                    if (i > 0 && j < FIELD_SIZE_X - 1 && Field[i - 1, j + 1].HasBomb())
                         count++;
                     if (j > 0 && Field[i, j - 1].HasBomb())
                         count++;
-                    if (j < FIELD_SIZE - 1 && Field[i, j + 1].HasBomb())
+                    if (j < FIELD_SIZE_X - 1 && Field[i, j + 1].HasBomb())
                         count++;
-                    if (i < FIELD_SIZE - 1 && j > 0 && Field[i + 1, j - 1].HasBomb())
+                    if (i < FIELD_SIZE_Y - 1 && j > 0 && Field[i + 1, j - 1].HasBomb())
                         count++;
-                    if (i < FIELD_SIZE - 1 && Field[i + 1, j].HasBomb())
+                    if (i < FIELD_SIZE_Y - 1 && Field[i + 1, j].HasBomb())
                         count++;
-                    if (i < FIELD_SIZE - 1 && j < FIELD_SIZE - 1 && Field[i + 1, j + 1].HasBomb())
+                    if (i < FIELD_SIZE_Y - 1 && j < FIELD_SIZE_X - 1 && Field[i + 1, j + 1].HasBomb())
                         count++;
 
                     if (count != 0)
@@ -141,31 +172,52 @@ namespace mines
             }
 
             // If the field is blank, then recursively open all neighbour cells which aren't marked
-            if (Field[i, j].GetBackLabelText() == "") {
+            if (!Field[i,j].HasMark() && Field[i, j].GetBackLabelText() == "") {
                 if (i > 0 && j > 0 && !Field[i - 1, j - 1].IsOpen())
                     OpenCell(i - 1, j - 1);
                 if (i > 0 && !Field[i - 1, j].IsOpen())
                     OpenCell(i - 1, j);
-                if (i > 0 && j < FIELD_SIZE - 1 && !Field[i - 1, j + 1].IsOpen())
+                if (i > 0 && j < FIELD_SIZE_X - 1 && !Field[i - 1, j + 1].IsOpen())
                     OpenCell(i - 1, j + 1);
                 if (j > 0 && !Field[i, j - 1].IsOpen())
                     OpenCell(i, j - 1);
-                if (j < FIELD_SIZE - 1 && !Field[i, j + 1].IsOpen())
+                if (j < FIELD_SIZE_X - 1 && !Field[i, j + 1].IsOpen())
                     OpenCell(i, j + 1);
-                if (i < FIELD_SIZE - 1 && j > 0 && !Field[i + 1, j - 1].IsOpen())
+                if (i < FIELD_SIZE_Y - 1 && j > 0 && !Field[i + 1, j - 1].IsOpen())
                     OpenCell(i + 1, j - 1);
-                if (i < FIELD_SIZE - 1 && !Field[i + 1, j].IsOpen())
+                if (i < FIELD_SIZE_Y - 1 && !Field[i + 1, j].IsOpen())
                     OpenCell(i + 1, j);
-                if (i < FIELD_SIZE - 1 && j < FIELD_SIZE - 1 && !Field[i + 1, j + 1].IsOpen())
+                if (i < FIELD_SIZE_Y - 1 && j < FIELD_SIZE_X - 1 && !Field[i + 1, j + 1].IsOpen())
                     OpenCell(i + 1, j + 1);
             }
+        }
+
+        public void UpdateOptions()
+        {
+            // Deleting previous field
+            for (int i = 0; i < FIELD_SIZE_Y; i++) {
+                for (int j = 0; j < FIELD_SIZE_X; j++) {
+                    Field[i, j].Delete();
+                }
+            }
+
+            FIELD_SIZE_X = Options.OPTION_FIELD_SIZE_X;
+            FIELD_SIZE_Y = Options.OPTION_FIELD_SIZE_Y;
+            MINE_NUM = Options.MINE_NUM;
+            
+            // Creating new field
+            Field = new Cell[FIELD_SIZE_Y, FIELD_SIZE_X];
+            CreateCellGridAt(5, 75);
+            ResizeForm();
+
+            btnResetGame.PerformClick();
         }
 
         private void msMainMenuGameNew_Click(object sender, EventArgs e)
         {
             // Clearing field
-            for (int i = 0; i < FIELD_SIZE; i++) {
-                for (int j = 0; j < FIELD_SIZE; j++) {
+            for (int i = 0; i < FIELD_SIZE_Y; i++) {
+                for (int j = 0; j < FIELD_SIZE_X; j++) {
                     Field[i, j].Clear();
                 }
             }
@@ -178,22 +230,19 @@ namespace mines
             btnResetGame.Image = IMG_NEUTRAL;
         }
 
-        private void LockField()
+        private void msMainGameOptions_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < FIELD_SIZE; i++) {
-                for (int j = 0; j < FIELD_SIZE; j++) {
-                    Field[i, j].Lock();
-                }
-            }
+            Options.Show();
         }
 
-        private void UnlockField()
+        private void msMenuHelp_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < FIELD_SIZE; i++) {
-                for (int j = 0; j < FIELD_SIZE; j++) {
-                    Field[i, j].Unlock();
-                }
-            }
+
+        }
+
+        private void msMenuAbout_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
