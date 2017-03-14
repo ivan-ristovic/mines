@@ -1,6 +1,6 @@
 # :sparkles: Minesweeper :sparkles:
 
-![ss](https://raw.githubusercontent.com/ivan-ristovic/mines/master/screenshots/2017-03-17.png)
+![ss](https://raw.githubusercontent.com/ivan-ristovic/mines/master/screenshots/2017-03-17.PNG)
 
 Coded in C# using Visual Studio 2017 RC.
 
