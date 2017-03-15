@@ -82,6 +82,10 @@ namespace mines
             for (int i = 0; i < MINE_NUM; i++) {
                 int x = r.Next(FIELD_SIZE_Y);
                 int y = r.Next(FIELD_SIZE_X);
+                if (Field[x, y].HasBomb()) {
+                    i--;
+                    continue;
+                }
                 Field[x, y].SetBomb();
                 Field[x, y].SetBackLabelText("*");
             }
