@@ -41,7 +41,18 @@ namespace mines
             // Resizing form to fit the field
             ResizeForm();
 
+            // Resizing background panel
+            ResizeBackgroundPanel();
+
             btnResetGame.Image = IMG_NEUTRAL;
+        }
+
+        private void ResizeBackgroundPanel()
+        {
+            pnlBackground.Width = Width - 23;
+            pnlBackground.Height = Height - 117;
+            pnlBackground.SendToBack();
+            pnlBackground.Location = new Point(4, 74);
         }
 
         private void ResizeForm()
@@ -213,6 +224,7 @@ namespace mines
             Field = new Cell[FIELD_SIZE_Y, FIELD_SIZE_X];
             CreateCellGridAt(5, 75);
             ResizeForm();
+            ResizeBackgroundPanel();
 
             btnResetGame.PerformClick();
         }

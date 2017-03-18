@@ -33,9 +33,10 @@
             this.msMenu = new System.Windows.Forms.MenuStrip();
             this.msMenuGame = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenuGameNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.msMainGameOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenuAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.msMainGameOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.pnlBackground = new System.Windows.Forms.Panel();
             this.msMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,8 +74,15 @@
             // 
             this.msMenuGameNew.Name = "msMenuGameNew";
             this.msMenuGameNew.Size = new System.Drawing.Size(152, 22);
-            this.msMenuGameNew.Text = "New";
+            this.msMenuGameNew.Text = "New Game";
             this.msMenuGameNew.Click += new System.EventHandler(this.msMainMenuGameNew_Click);
+            // 
+            // msMainGameOptions
+            // 
+            this.msMainGameOptions.Name = "msMainGameOptions";
+            this.msMainGameOptions.Size = new System.Drawing.Size(152, 22);
+            this.msMainGameOptions.Text = "Options";
+            this.msMainGameOptions.Click += new System.EventHandler(this.msMainGameOptions_Click);
             // 
             // msMenuHelp
             // 
@@ -90,18 +98,20 @@
             this.msMenuAbout.Text = "About";
             this.msMenuAbout.Click += new System.EventHandler(this.msMenuAbout_Click);
             // 
-            // msMainGameOptions
+            // pnlBackground
             // 
-            this.msMainGameOptions.Name = "msMainGameOptions";
-            this.msMainGameOptions.Size = new System.Drawing.Size(152, 22);
-            this.msMainGameOptions.Text = "Options";
-            this.msMainGameOptions.Click += new System.EventHandler(this.msMainGameOptions_Click);
+            this.pnlBackground.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlBackground.Location = new System.Drawing.Point(12, 73);
+            this.pnlBackground.Name = "pnlBackground";
+            this.pnlBackground.Size = new System.Drawing.Size(295, 296);
+            this.pnlBackground.TabIndex = 3;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(319, 381);
+            this.Controls.Add(this.pnlBackground);
             this.Controls.Add(this.btnResetGame);
             this.Controls.Add(this.msMenu);
             this.DoubleBuffered = true;
@@ -126,6 +136,7 @@
         private System.Windows.Forms.ToolStripMenuItem msMenuHelp;
         private System.Windows.Forms.ToolStripMenuItem msMenuAbout;
         private System.Windows.Forms.ToolStripMenuItem msMainGameOptions;
+        private System.Windows.Forms.Panel pnlBackground;
     }
 }
 
