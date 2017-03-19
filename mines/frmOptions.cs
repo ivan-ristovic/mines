@@ -15,7 +15,7 @@ namespace mines
         // Option set
         public int OPTION_FIELD_SIZE_X = 10;
         public int OPTION_FIELD_SIZE_Y = 10;
-        public int MINE_NUM = 10;
+        public int MINE_NUM = 15;
 
         // Parent form
         private MainForm MainParent;
@@ -48,17 +48,17 @@ namespace mines
 
         private void rbMines10_CheckedChanged(object sender, EventArgs e)
         {
-            MINE_NUM = 10;
+            MINE_NUM = 15;
         }
 
         private void rbMines20_CheckedChanged(object sender, EventArgs e)
         {
-            MINE_NUM = 20;
+            MINE_NUM = 25;
         }
 
         private void rbMines40_CheckedChanged(object sender, EventArgs e)
         {
-            MINE_NUM = 40;
+            MINE_NUM = 45;
         }
 
         private void frmOptions_FormClosing(object sender, FormClosingEventArgs e)

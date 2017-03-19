@@ -37,6 +37,7 @@
             this.msMenuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.msMenuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlBackground = new System.Windows.Forms.Panel();
+            this.lblMineCount = new System.Windows.Forms.Label();
             this.msMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,14 +74,14 @@
             // msMenuGameNew
             // 
             this.msMenuGameNew.Name = "msMenuGameNew";
-            this.msMenuGameNew.Size = new System.Drawing.Size(152, 22);
+            this.msMenuGameNew.Size = new System.Drawing.Size(132, 22);
             this.msMenuGameNew.Text = "New Game";
             this.msMenuGameNew.Click += new System.EventHandler(this.msMainMenuGameNew_Click);
             // 
             // msMainGameOptions
             // 
             this.msMainGameOptions.Name = "msMainGameOptions";
-            this.msMainGameOptions.Size = new System.Drawing.Size(152, 22);
+            this.msMainGameOptions.Size = new System.Drawing.Size(132, 22);
             this.msMainGameOptions.Text = "Options";
             this.msMainGameOptions.Click += new System.EventHandler(this.msMainGameOptions_Click);
             // 
@@ -106,11 +107,24 @@
             this.pnlBackground.Size = new System.Drawing.Size(295, 296);
             this.pnlBackground.TabIndex = 3;
             // 
+            // lblMineCount
+            // 
+            this.lblMineCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMineCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMineCount.ForeColor = System.Drawing.Color.Red;
+            this.lblMineCount.Location = new System.Drawing.Point(12, 27);
+            this.lblMineCount.Name = "lblMineCount";
+            this.lblMineCount.Size = new System.Drawing.Size(62, 40);
+            this.lblMineCount.TabIndex = 4;
+            this.lblMineCount.Text = "0";
+            this.lblMineCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(319, 381);
+            this.Controls.Add(this.lblMineCount);
             this.Controls.Add(this.pnlBackground);
             this.Controls.Add(this.btnResetGame);
             this.Controls.Add(this.msMenu);
@@ -137,6 +151,7 @@
         private System.Windows.Forms.ToolStripMenuItem msMenuAbout;
         private System.Windows.Forms.ToolStripMenuItem msMainGameOptions;
         private System.Windows.Forms.Panel pnlBackground;
+        private System.Windows.Forms.Label lblMineCount;
     }
 }
 

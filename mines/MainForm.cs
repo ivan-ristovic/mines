@@ -24,6 +24,10 @@ namespace mines
         // Options form
         private frmOptions Options;
 
+        // Mark counter
+        private int MarkedMines = 0;
+        private int MarkedCorrectly = 0;
+
 
         public MainForm()
         {
@@ -34,34 +38,37 @@ namespace mines
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            InitializeGame();
+        }
+
+        private void InitializeGame()
+        {
             // Creating field
             Field = new Cell[FIELD_SIZE_Y, FIELD_SIZE_X];
             CreateCellGridAt(5, 75);
 
             // Resizing form to fit the field
-            ResizeForm();
-
-            // Resizing background panel
-            ResizeBackgroundPanel();
-
-            btnResetGame.Image = IMG_NEUTRAL;
-        }
-
-        private void ResizeBackgroundPanel()
-        {
-            pnlBackground.Width = Width - 23;
-            pnlBackground.Height = Height - 117;
-            pnlBackground.SendToBack();
-            pnlBackground.Location = new Point(4, 74);
-        }
-
-        private void ResizeForm()
-        {
             Width = 25 + FIELD_SIZE_X * Cell.CELL_SIZE;
             Height = 120 + FIELD_SIZE_Y * Cell.CELL_SIZE;
 
             // Calculating middle reset button location and placing it's image
             btnResetGame.Location = new Point((Width - btnResetGame.Width) / 2, 30);
+
+            // Resizing background panel to fit the field
+            pnlBackground.Width = Width - 23;
+            pnlBackground.Height = Height - 117;
+            pnlBackground.SendToBack();
+            pnlBackground.Location = new Point(4, 74);
+
+            // Mine counters
+            MarkedMines = 0;
+            MarkedCorrectly = 0;
+            lblMineCount.Text = MINE_NUM.ToString();
+
+            // Game over indicator
+            GameOver = false;
+
+            btnResetGame.Image = IMG_NEUTRAL;
         }
 
         private void CreateCellGridAt(int x, int y)
@@ -162,13 +169,44 @@ namespace mines
             int j = l.GetY();
 
             // Determinating left/right click
-            if (me.Button == MouseButtons.Left && !Field[i, j].HasMark()) {
-                btnResetGame.Image = IMG_OPEN;
-                OpenCell(i, j);
-                if (!GameOver)
-                    btnResetGame.Image = IMG_NEUTRAL;
-            } else
-                Field[i, j].Mark();
+            if (me.Button == MouseButtons.Left) {               // Left click
+                // If the cell is not marked, we open it
+                if (!Field[i, j].HasMark()) {
+                    btnResetGame.Image = IMG_OPEN;
+                    OpenCell(i, j);
+                    if (!GameOver)
+                        btnResetGame.Image = IMG_NEUTRAL;
+                } 
+            } else {                                            // Right click
+                // User cannot mark more mines than there really are
+                if (MarkedMines < MINE_NUM) {
+
+                    // Checking if field already has a mark
+                    if (Field[i, j].HasMark()) {
+                        // If it does, decrementing the counters since the flag will be removed
+                        MarkedMines--;
+                        MarkedCorrectly--;
+                    } else {
+                        MarkedMines++;
+                        // Update correct guess counter, if user marked correctly
+                        if (Field[i, j].HasBomb())
+                            MarkedCorrectly++;
+                    }
+
+                    // Toggling flag
+                    Field[i, j].Mark();
+                }
+            }
+
+            // Updating mine label text
+            lblMineCount.Text = (MINE_NUM - MarkedMines).ToString();
+
+            // If user marked all bombs, he won the game
+            if (MarkedCorrectly == MINE_NUM) {
+                GameOver = true;
+                btnResetGame.Image = IMG_WIN;
+                LockField();
+            }
         }
 
         private void OpenCell(int i, int j)
@@ -219,13 +257,9 @@ namespace mines
             FIELD_SIZE_X = Options.OPTION_FIELD_SIZE_X;
             FIELD_SIZE_Y = Options.OPTION_FIELD_SIZE_Y;
             MINE_NUM = Options.MINE_NUM;
-            
-            // Creating new field
-            Field = new Cell[FIELD_SIZE_Y, FIELD_SIZE_X];
-            CreateCellGridAt(5, 75);
-            ResizeForm();
-            ResizeBackgroundPanel();
 
+            InitializeGame();
+            
             btnResetGame.PerformClick();
         }
 
@@ -243,6 +277,7 @@ namespace mines
             PlaceBombs();
             UpdateFieldLabels();
             UnlockField();
+            lblMineCount.Text = MINE_NUM.ToString();
             btnResetGame.Image = IMG_NEUTRAL;
         }
 
