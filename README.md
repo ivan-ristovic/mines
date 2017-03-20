@@ -1,6 +1,6 @@
 # :sparkles: Minesweeper :sparkles:
 
-![ss](https://raw.githubusercontent.com/ivan-ristovic/mines/master/screenshots/2017-03-17.PNG)
+![ss](https://raw.githubusercontent.com/ivan-ristovic/mines/master/screenshots/2017-03-20.PNG)
 
 Coded in C# using Visual Studio 2017 RC.
 
@@ -15,7 +15,14 @@ For now the only way to actually run the program is to download the project and 
 When I finish, I will add an installer or something.
 
 ## :video_game: Usage
-TODO
+| **Key** | **Description** |
+| :---  | :--- |
+| ```Left click``` | Uncover a cell |
+| ```Right click``` | Toggle mine marker |
+
+To start a new game you can either do it via menu, or by clicking on a smiley face (old school).
+
+You can set the game parameters (mine number or field size) in Options menu.
 
 ## :bug: Known bugs
-TODO
+- On Windows 10, for some reason certain buttons need to be clicked more than once to be opened.
