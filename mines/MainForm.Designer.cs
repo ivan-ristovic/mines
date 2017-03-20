@@ -47,6 +47,7 @@
             this.btnResetGame.Name = "btnResetGame";
             this.btnResetGame.Size = new System.Drawing.Size(40, 40);
             this.btnResetGame.TabIndex = 1;
+            this.btnResetGame.TabStop = false;
             this.btnResetGame.UseVisualStyleBackColor = true;
             this.btnResetGame.Click += new System.EventHandler(this.msMainMenuGameNew_Click);
             // 

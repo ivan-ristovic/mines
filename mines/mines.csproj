@@ -91,22 +91,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\imgLose.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="assets\imgMine.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\imgNeutral.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\imgOpen.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\imgWin.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="assets\imgFlag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\imgLose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\imgNeutral.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\imgOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\imgWin.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
