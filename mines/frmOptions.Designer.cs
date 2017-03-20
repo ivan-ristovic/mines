@@ -33,9 +33,9 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.rbField15 = new System.Windows.Forms.RadioButton();
             this.gbMines = new System.Windows.Forms.GroupBox();
-            this.rbMines40 = new System.Windows.Forms.RadioButton();
-            this.rbMines20 = new System.Windows.Forms.RadioButton();
-            this.rbMines10 = new System.Windows.Forms.RadioButton();
+            this.rbMines3 = new System.Windows.Forms.RadioButton();
+            this.rbMines2 = new System.Windows.Forms.RadioButton();
+            this.rbMines1 = new System.Windows.Forms.RadioButton();
             this.gbField.SuspendLayout();
             this.gbMines.SuspendLayout();
             this.SuspendLayout();
@@ -89,9 +89,9 @@
             // 
             // gbMines
             // 
-            this.gbMines.Controls.Add(this.rbMines40);
-            this.gbMines.Controls.Add(this.rbMines20);
-            this.gbMines.Controls.Add(this.rbMines10);
+            this.gbMines.Controls.Add(this.rbMines3);
+            this.gbMines.Controls.Add(this.rbMines2);
+            this.gbMines.Controls.Add(this.rbMines1);
             this.gbMines.Location = new System.Drawing.Point(107, 12);
             this.gbMines.Name = "gbMines";
             this.gbMines.Size = new System.Drawing.Size(89, 99);
@@ -99,40 +99,40 @@
             this.gbMines.TabStop = false;
             this.gbMines.Text = "Mine count:";
             // 
-            // rbMines40
+            // rbMines3
             // 
-            this.rbMines40.AutoSize = true;
-            this.rbMines40.Location = new System.Drawing.Point(6, 65);
-            this.rbMines40.Name = "rbMines40";
-            this.rbMines40.Size = new System.Drawing.Size(37, 17);
-            this.rbMines40.TabIndex = 3;
-            this.rbMines40.Text = "40";
-            this.rbMines40.UseVisualStyleBackColor = true;
-            this.rbMines40.CheckedChanged += new System.EventHandler(this.rbMines40_CheckedChanged);
+            this.rbMines3.AutoSize = true;
+            this.rbMines3.Location = new System.Drawing.Point(6, 65);
+            this.rbMines3.Name = "rbMines3";
+            this.rbMines3.Size = new System.Drawing.Size(37, 17);
+            this.rbMines3.TabIndex = 3;
+            this.rbMines3.Text = "45";
+            this.rbMines3.UseVisualStyleBackColor = true;
+            this.rbMines3.CheckedChanged += new System.EventHandler(this.rbMines40_CheckedChanged);
             // 
-            // rbMines20
+            // rbMines2
             // 
-            this.rbMines20.AutoSize = true;
-            this.rbMines20.Location = new System.Drawing.Point(6, 42);
-            this.rbMines20.Name = "rbMines20";
-            this.rbMines20.Size = new System.Drawing.Size(37, 17);
-            this.rbMines20.TabIndex = 2;
-            this.rbMines20.Text = "20";
-            this.rbMines20.UseVisualStyleBackColor = true;
-            this.rbMines20.CheckedChanged += new System.EventHandler(this.rbMines20_CheckedChanged);
+            this.rbMines2.AutoSize = true;
+            this.rbMines2.Location = new System.Drawing.Point(6, 42);
+            this.rbMines2.Name = "rbMines2";
+            this.rbMines2.Size = new System.Drawing.Size(37, 17);
+            this.rbMines2.TabIndex = 2;
+            this.rbMines2.Text = "25";
+            this.rbMines2.UseVisualStyleBackColor = true;
+            this.rbMines2.CheckedChanged += new System.EventHandler(this.rbMines20_CheckedChanged);
             // 
-            // rbMines10
+            // rbMines1
             // 
-            this.rbMines10.AutoSize = true;
-            this.rbMines10.Checked = true;
-            this.rbMines10.Location = new System.Drawing.Point(6, 19);
-            this.rbMines10.Name = "rbMines10";
-            this.rbMines10.Size = new System.Drawing.Size(37, 17);
-            this.rbMines10.TabIndex = 0;
-            this.rbMines10.TabStop = true;
-            this.rbMines10.Text = "10";
-            this.rbMines10.UseVisualStyleBackColor = true;
-            this.rbMines10.CheckedChanged += new System.EventHandler(this.rbMines10_CheckedChanged);
+            this.rbMines1.AutoSize = true;
+            this.rbMines1.Checked = true;
+            this.rbMines1.Location = new System.Drawing.Point(6, 19);
+            this.rbMines1.Name = "rbMines1";
+            this.rbMines1.Size = new System.Drawing.Size(37, 17);
+            this.rbMines1.TabIndex = 0;
+            this.rbMines1.TabStop = true;
+            this.rbMines1.Text = "15";
+            this.rbMines1.UseVisualStyleBackColor = true;
+            this.rbMines1.CheckedChanged += new System.EventHandler(this.rbMines10_CheckedChanged);
             // 
             // frmOptions
             // 
@@ -163,8 +163,8 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton rbField15;
         private System.Windows.Forms.GroupBox gbMines;
-        private System.Windows.Forms.RadioButton rbMines40;
-        private System.Windows.Forms.RadioButton rbMines20;
-        private System.Windows.Forms.RadioButton rbMines10;
+        private System.Windows.Forms.RadioButton rbMines3;
+        private System.Windows.Forms.RadioButton rbMines2;
+        private System.Windows.Forms.RadioButton rbMines1;
     }
 }
